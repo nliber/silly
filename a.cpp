@@ -1,3 +1,8 @@
+#include <ccruft/cool/Out.h>
+#include <ccruft/cool/pretty_name.h>
+
+#include <boost/exception/diagnostic_information.hpp>
+
 #include <algorithm>
 #include <fstream>
 #include <list>
@@ -88,8 +93,12 @@ namespace {
         
         friend std::ostream& operator<<(std::ostream& os, Args const&& that)
         {
+            const char* space = "";
             for (auto argv = that._argv; *argv; ++argv)
-                os << argv << ' ';
+            {
+                os << space << *argv;
+                space = " ";
+            }
 
             return os;
         }
@@ -102,15 +111,12 @@ namespace {
 int main(int argc, char* argv[])
 {
 	try { return Main(argc, argv); }
-    catch (std::exception const& e)
-    {
-        std::cerr << Args(argv) << ' ' << __PRETTY_FUNCTION__ << " std::exception: " << e.what() << std::endl; 
-        return 1;
-    }
     catch (...)
     {
-        std::cerr << Args(argv) << ' ' << __PRETTY_FUNCTION__ << " unknown exception" << std::endl; 
-        return 255;
+        std::cerr << Args(argv) << '\n'
+                << __PRETTY_FUNCTION__ << '\n'
+                << boost::current_exception_diagnostic_information() << std::endl;
+        return 1;
     }
 }
 
