@@ -12,6 +12,7 @@ do
             CC=/opt/local/bin/gcc-mp-4.9
             CXX=/opt/local/bin/g++-mp-4.9
             cmake ..
+            make
         )
 
         (
@@ -19,6 +20,7 @@ do
             CC=/opt/local/bin/clang-mp-4.9
             CXX=/opt/local/bin/clang++-mp-4.9
             cmake ..
+            make
         )
     )
 done
