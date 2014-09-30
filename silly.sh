@@ -1,8 +1,8 @@
 #!/bin/sh
 set -xv
 
-gnu_version="${GNU_VERSION:-5}"
-clang_version="${CLANG_VERSION:-3.6}"
+gnu_version="${GNU_VERSION:-4.9 5}"
+clang_version="${CLANG_VERSION:-3.5 3.6}"
 
 for d in "${@}"
 do (
