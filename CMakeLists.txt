@@ -1,6 +1,48 @@
 cmake_minimum_required (VERSION 2.6)
 project (a.out)
+find_package(Threads REQUIRED)
+find_package(Boost 1.57.0
+    COMPONENTS
+        atomic
+        chrono
+        container
+        context
+        coroutine
+        date_time
+        exception
+        filesystem
+        graph
+        iostreams
+        locale
+        log
+        log_setup
+        math_c99
+        math_c99f
+        math_c99l
+        math_tr1
+        math_tr1f
+        math_tr1l
+        prg_exec_monitor
+        program_options
+        #python
+        random
+        regex
+        serialization
+        signals
+        system
+        test_exec_monitor
+        thread
+        timer
+        unit_test_framework
+        wave
+        wserialization
+    REQUIRED)
 add_executable(a.out a.cpp)
+target_link_libraries(a.out
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES}
+)
+include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb3")
@@ -19,6 +61,7 @@ set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -fdiagnostics-show-category=
 set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -Wall")
 set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -Wextra")
 set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -Wno-unused-local-typedefs")
+set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -Wno-deprecated-declarations")
 set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -fdiagnostics-color")
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
@@ -29,6 +72,5 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_GNU_FLAGS}")
 endif()
 
-include_directories(SYSTEM "/site/apps/boost")
 include_directories("/Users/nliber/git/cpp-infrastructure/ccruft/src/main/")
 
