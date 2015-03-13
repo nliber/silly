@@ -49,6 +49,18 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb3")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
 
+# Sanitizers
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=integer-divide-by-zero")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=unreachable")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=vla-bound")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=null")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=return")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=signed-integer-overflow")
+
+
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -stdlib=libc++")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Weverything")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Wno-c++98-compat")
@@ -63,6 +75,8 @@ set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -Wextra")
 set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -Wno-unused-local-typedefs")
 set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -Wno-deprecated-declarations")
 set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -fdiagnostics-color")
+set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -Og")
+set(CMAKE_CXX_GNU_FLAGS "${CMAKE_CXX_GNU_FLAGS} -fsanitize=undefined")
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_CLANG_FLAGS}")
