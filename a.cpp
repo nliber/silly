@@ -84,6 +84,21 @@
 #include <cstdint>
 //#include <cuchar>
 
+#ifdef __clang__
+#include <boost/utility/string_ref.hpp>
+namespace std { namespace experimental {
+    template<typename charT, typename traits = std::char_traits<charT>>
+    using basic_string_view = boost::basic_string_ref<charT, traits>;
+
+    using string_view       = basic_string_view<char>;
+    using u16string_view    = basic_string_view<char16_t>;
+    using u32string_view    = basic_string_view<char32_t>;
+    using wstring_view      = basic_string_view<wchar_t>;
+} /* experimental namespace */ } /* std namespace */
+#else
+#include <experimental/string_view>
+#endif
+
 extern int Main(int argc, char const*const argv[]);
 
 namespace {
