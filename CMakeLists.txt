@@ -50,16 +50,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
 
 # Sanitizers
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize-undefined-trap-on-error")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=integer-divide-by-zero")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=unreachable")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=vla-bound")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=null")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=return")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=signed-integer-overflow")
-
+set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize-undefined-trap-on-error")
+set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize=address")
+#set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize=thread")
+set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize=integer-divide-by-zero")
+set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize=unreachable")
+set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize=vla-bound")
+set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize=null")
+set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize=return")
+set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize=signed-integer-overflow")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_SANITIZER_FLAGS}")
 
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -stdlib=libc++")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Weverything")
@@ -85,6 +85,4 @@ endif()
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_GNU_FLAGS}")
 endif()
-
-include_directories("/Users/nliber/git/cpp-infrastructure/ccruft/src/main/")
 
