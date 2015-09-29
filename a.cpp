@@ -1,6 +1,3 @@
-#include <ccruft/cool/Out.h>
-#include <ccruft/cool/pretty_name.h>
-
 #include <boost/exception/diagnostic_information.hpp>
 
 #include <algorithm>

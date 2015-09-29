@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (a.out)
 find_package(Threads REQUIRED)
-find_package(Boost 1.57.0
+find_package(Boost 1.59.0
     COMPONENTS
         atomic
         chrono
@@ -50,9 +50,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
 
 # Sanitizers
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize-undefined-trap-on-error")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=integer-divide-by-zero")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=unreachable")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=vla-bound")

@@ -1,8 +1,8 @@
 #!/bin/sh
 set -xv
 
-gnu_version="${GNU_VERSION:-4.9 5 6}"
-clang_version="${CLANG_VERSION:-3.5 3.6}"
+gnu_version="${GNU_VERSION:-5}"
+clang_version="${CLANG_VERSION:-""}"
 
 for d in "${@}"
 do (
@@ -14,15 +14,15 @@ do (
     do (
         mkdir -p "gcc${g}"
         cd "gcc${g}"
-        CC="/opt/local/bin/gcc-mp-${g}" CXX="/opt/local/bin/g++-mp-${g}" cmake ..
+        CC="/usr/local/bin/gcc-${g}" CXX="/usr/local/bin/g++-${g}" cmake ..
         make
     ) done
 
-    for c in ${clang_version}
+    for c in ""
     do (
         mkdir -p "clang${c}"
         cd "clang${c}"
-        CC="/opt/local/bin/clang-mp-${c}" CXX="/opt/local/bin/clang++-mp-${c}" cmake ..
+        CC="/usr/bin/clang${c}" CXX="/usr/bin/clang++${c}" cmake ..
         make
     ) done
 ) done
