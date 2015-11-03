@@ -1,4 +1,5 @@
 #include <boost/exception/diagnostic_information.hpp>
+#include <boost/date_time/local_time/local_time.hpp>
 
 #include <algorithm>
 #include <fstream>
@@ -122,14 +123,32 @@ namespace {
 
 int main(int argc, char* argv[])
 {
-	try { return Main(argc, argv); }
+    auto started = boost::posix_time::microsec_clock::local_time();
+    std::cerr
+        << "Built " <<  __FILE__ << " on " << __DATE__ << ' ' << __TIME__
+        << "\nStarted " << Args(argv)
+        << " at " << started
+        << std::endl;
+
+    int status;
+	try { status = Main(argc, argv); }
     catch (...)
     {
         std::cerr << Args(argv) << '\n'
                 << __PRETTY_FUNCTION__ << '\n'
                 << boost::current_exception_diagnostic_information() << std::endl;
-        return 1;
+        status = 1;
     }
+
+    auto stopped = boost::posix_time::microsec_clock::local_time();
+    std::cerr
+        << "Stopped " << Args(argv)
+        << " at " << stopped
+        << " (duration: " << (stopped - started)
+        << ") with status=" << status
+        << std::endl;
+
+    return status;
 }
 
 int Main(int /* argc */, char const*const /* argv */[])
