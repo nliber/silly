@@ -100,25 +100,59 @@ namespace std { namespace experimental {
 extern int Main(int argc, char const*const argv[]);
 
 namespace {
-    struct Args
+
+    class Args
     {
-        explicit Args(char const*const argv[]) : _argv(argv) {}
-        
-        friend std::ostream& operator<<(std::ostream& os, Args const&& that)
+    public:
+        explicit Args(std::vector<std::string> vs)
+            : args{ std::move(vs) }
+        {
+            argvs.reserve(args.size() + 1);
+            std::transform(std::begin(args), std::end(args), std::back_inserter(argvs), [](std::string const& s) { return s.c_str(); });
+            argvs.emplace_back();
+        }
+
+        template<typename InputIterator>
+        Args(InputIterator first, InputIterator last)
+            : Args(std::vector<std::string>(std::move(first), std::move(last)))
+        {
+        }
+
+        explicit Args(int c, const char*const v[])
+            : Args{ v, v + c }
+        {
+        }
+
+        explicit Args(const char*const v[])
+            : Args{ [](const char*const vv[]) { int c = 0; for (; *vv; ++vv) ++c; return c; }(v), v }
+        {
+        }
+
+        Args(Args const&) = delete;
+        Args& operator=(Args const&) = delete;
+        Args& operator=(Args&&) = delete;
+        Args(Args&&) = delete;
+        ~Args() = default;
+
+        int argc() const noexcept { return static_cast<int>(args.size()); }
+        const char*const* argv() const noexcept { return argvs.data(); }
+
+        friend std::ostream& operator<<(std::ostream& os, Args const& that)
         {
             const char* space = "";
-            for (auto argv = that._argv; *argv; ++argv)
+            for (auto&& s : that.args)
             {
-                os << space << *argv;
+                os << space << s;
                 space = " ";
             }
-
             return os;
         }
 
     private:
-        char const*const* _argv;
+        std::vector<std::string> args;
+        std::vector<const char*> argvs;
     };
+
 } // namespace
 
 int main(int argc, char* argv[])
