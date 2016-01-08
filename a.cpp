@@ -114,7 +114,7 @@ namespace {
 
         template<typename InputIterator>
         Args(InputIterator first, InputIterator last)
-            : Args(std::vector<std::string>(std::move(first), std::move(last)))
+            : Args{ std::vector<std::string>(std::move(first), std::move(last)) }
         {
         }
 
@@ -128,21 +128,42 @@ namespace {
         {
         }
 
-        Args(Args const&) = delete;
-        Args& operator=(Args const&) = delete;
-        Args& operator=(Args&&) = delete;
-        Args(Args&&) = delete;
+        Args(Args const& that)
+            : Args{ that.args }
+        {
+        }
+
+        Args(Args&& that)
+            : args{ std::move(that.args) }
+            , argvs{ std::move(that.argvs) }
+        {
+            that = Args{ std::vector<std::string>{} };
+        }
+
         ~Args() = default;
 
-        int argc() const noexcept { return static_cast<int>(args.size()); }
+        friend void swap(Args& lhs, Args& rhs)
+        {
+            using namespace std;
+            swap(lhs.args, rhs.args);
+            swap(lhs.argvs, rhs.argvs);
+        }
+
+        Args& operator=(Args that)
+        {
+            swap(*this, that);
+            return *this;
+        }
+
+        int argc()               const noexcept { return static_cast<int>(args.size()); }
         const char*const* argv() const noexcept { return argvs.data(); }
 
         friend std::ostream& operator<<(std::ostream& os, Args const& that)
         {
             const char* space = "";
-            for (auto&& s : that.args)
+            for (auto&& a : that.args)
             {
-                os << space << s;
+                os << space << a;
                 space = " ";
             }
             return os;
