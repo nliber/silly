@@ -104,7 +104,7 @@ namespace {
     class Args
     {
     public:
-        explicit Args(std::vector<std::string> vs) noexcept
+        explicit Args(std::vector<std::string> vs)
             : args{ std::move(vs) }
         {
             argvs.reserve(args.size() + 1);
