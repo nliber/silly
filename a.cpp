@@ -104,7 +104,7 @@ namespace {
     class Args
     {
     public:
-        explicit Args(std::vector<std::string> vs)
+        explicit Args(std::vector<std::string> vs) noexcept
             : args{ std::move(vs) }
         {
             argvs.reserve(args.size() + 1);
@@ -142,14 +142,14 @@ namespace {
 
         ~Args() = default;
 
-        friend void swap(Args& lhs, Args& rhs)
+        friend void swap(Args& lhs, Args& rhs) noexcept
         {
             using namespace std;
             swap(lhs.args, rhs.args);
             swap(lhs.argvs, rhs.argvs);
         }
 
-        Args& operator=(Args that)
+        Args& operator=(Args that) noexcept
         {
             swap(*this, that);
             return *this;
