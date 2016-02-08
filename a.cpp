@@ -124,7 +124,7 @@ namespace {
         }
 
         explicit Args(const char*const v[])
-            : Args{ [](const char*const vv[]) { int c = 0; for (; *vv; ++vv) ++c; return c; }(v), v }
+            : Args{ v, [=]() mutable { while(*v) ++v; return v; }() }
         {
         }
 
