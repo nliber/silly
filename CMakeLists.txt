@@ -1,10 +1,10 @@
 cmake_minimum_required (VERSION 2.6)
 project (a.out)
 find_package(Threads REQUIRED)
-SET(BOOST_ROOT "/usr/local/Cellar/boost/1.61.0")
-SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BOOST_ROOT}/include)
-SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${BOOST_ROOT}/lib)
-find_package(Boost 1.61.0
+#SET(BOOST_ROOT "/usr/local/Cellar/boost/1.61.0")
+#SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BOOST_ROOT}/include)
+#SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${BOOST_ROOT}/lib)
+find_package(Boost 1.64.0
     COMPONENTS
         atomic
         chrono
@@ -47,10 +47,12 @@ target_link_libraries(a.out
 )
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb3")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/local/opt/llvm38/lib/llvm-3.8/include/c++/v1")
 
 # Sanitizers
 set(CMAKE_CXX_SANITIZER_FLAGS "${CMAKE_CXX_SANITIZER_FLAGS} -fsanitize-undefined-trap-on-error")
@@ -71,6 +73,7 @@ set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Wno-c++98-compat-pedantic")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Wno-padded")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Wno-date-time")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Wno-unused-member-function")
+set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Wno-reserved-id-macro")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -fcolor-diagnostics")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -fdiagnostics-format=vi")
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -fdiagnostics-show-category=name")

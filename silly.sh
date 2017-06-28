@@ -1,8 +1,8 @@
 #!/bin/sh
 set -xv
 
-gnu_version="${GNU_VERSION:-6}"
-clang_version="${CLANG_VERSION:-"3.8"}"
+gnu_version="${GNU_VERSION:-7.1}"
+clang_version="${CLANG_VERSION:-"802.0.42 4.0"}"
 
 for d in "${@}"
 do (
@@ -15,16 +15,16 @@ do (
         mkdir -p "gcc${g}"
         echo "gcc${g}/" >> ".gitignore"
         cd "gcc${g}"
-        CC="/usr/local/bin/gcc-${g}" CXX="/usr/local/bin/g++-${g}" cmake ..
+        CC="/usr/local/gcc-${g}/bin/gcc-${g}" CXX="/usr/local/gcc-${g}/bin/g++-${g}" cmake ..
         make
     ) done
 
-    for c in ""
+    for c in ${clang_version}
     do (
         mkdir -p "clang${c}"
         echo "clang${c}/" >> ".gitignore"
         cd "clang${c}"
-        CC="/usr/bin/clang${c}" CXX="/usr/bin/clang++${c}" cmake ..
+        CC="/usr/local/bin/clang-${c}" CXX="/usr/local/bin/clang++-${c}" cmake ..
         make
     ) done
 
