@@ -1,85 +1,116 @@
-#include <algorithm>
-#include <fstream>
-#include <list>
-#include <regex>
-#include <tuple>
-#include <array>
-#include <functional>
-#include <locale>
-#include <scoped_allocator>
-#include <type_traits>
-#include <atomic>
-#include <future>
-#include <map>
-#include <set>
-#include <typeindex>
-#include <bitset>
-#include <initializer_list>
-#include <memory>
-#include <sstream>
-#include <typeinfo>
-#include <chrono>
-#include <iomanip>
-#include <mutex>
-#include <stack>
-#include <unordered_map>
-//#include <codecvt>
-#include <ios>
-#include <new>
-#include <stdexcept>
-#include <unordered_set>
-#include <complex>
-#include <iosfwd>
-#include <numeric>
-#include <streambuf>
-#include <utility>
-#include <condition_variable>
-#include <iostream>
-#include <ostream>
-#include <string>
-#include <valarray>
-#include <deque>
-#include <istream>
-#include <queue>
-//#include <strstream>
-#include <vector>
-#include <exception>
-#include <iterator>
-#include <random>
-#include <system_error>
-#include <forward_list>
-#include <limits>
-#include <ratio>
-#include <thread>
-
-#include <cassert>
-#include <cinttypes>
-#include <csignal>
-#include <cstdio>
-#include <cwchar>
-#include <ccomplex>
-#include <ciso646>
-//#include <cstdalign>
-#include <cstdlib>
-#include <cwctype>
-#include <cctype>
-#include <climits>
-#include <cstdarg>
-#include <cstring>
-#include <cerrno>
-#include <clocale>
-#include <cstdbool>
-#include <ctgmath>
-#include <cfenv>
-#include <cmath>
-#include <cstddef>
-#include <ctime>
-#include <cfloat>
-#include <csetjmp>
-#include <cstdint>
-//#include <cuchar>
-
 extern int Main(int /* argc */, char const*const /* argv */[]);
+
+#include <cstdlib>
+#include <csignal>
+#include <csetjmp>
+#include <cstdarg>
+#include <typeinfo>
+#include <typeindex>
+#include <type_traits>
+#include <bitset>
+#include <functional>
+#include <utility>
+#include <ctime>
+#include <chrono>
+#include <cstddef>
+#include <initializer_list>
+#include <tuple>
+#if __has_include(<any>)
+#include <any>
+#endif
+#if __has_include(<optional>)
+#include <optional>
+#endif
+#if __has_include(<variant>)
+#include <variant>
+#endif
+
+#include <new>
+#include <memory>
+#include <scoped_allocator>
+#if __has_include(<memory_resource>)
+# include <memory_resource>
+#endif
+
+#include <climits>
+#include <cfloat>
+#include <cstdint>
+#include <cinttypes>
+#include <limits>
+
+#include <exception>
+#include <stdexcept>
+#include <cassert>
+#include <system_error>
+#include <cerrno>
+
+#include <cctype>
+#include <cwctype>
+#include <cstring>
+#include <cwchar>
+#if __has_include(<cuchar>)
+#include <cuchar>
+#endif
+#include <string>
+#include <string_view>
+
+#include <array>
+#include <vector>
+#include <deque>
+#include <list>
+#include <forward_list>
+#include <set>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
+#include <stack>
+#include <queue>
+
+#include <algorithm>
+#if __has_include(<execution>)
+#include <execution>
+#endif
+
+#include <iterator>
+
+#include <cmath>
+#include <complex>
+#include <valarray>
+#include <random>
+#include <numeric>
+#include <ratio>
+#include <cfenv>
+
+#include <iosfwd>
+#include <ios>
+#include <istream>
+#include <ostream>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+// #include <strstream>    // deprecated
+#include <iomanip>
+#include <streambuf>
+#include <cstdio>
+
+#include <locale>
+#include <clocale>
+#include <codecvt>      // deprecated C++17
+
+#include <regex>
+
+#include <atomic>
+
+#include <thread>
+#include <mutex>
+#include <shared_mutex>
+#include <future>
+#include <condition_variable>
+
+#if __has_include(<filesystem>)
+#include <filesystem>
+#endif
+
 int Main(int /* argc */, char const*const /* argv */[])
 {
     return 0;
