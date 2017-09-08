@@ -7,7 +7,7 @@ clang_version="${CLANG_VERSION:-"5.0 xcode"}"
 for d in "${@}"
 do (
     mkdir -p "${d}"
-    cp a.cpp CMakeLists.txt "${d}"
+    cp a.cpp main.cpp CMakeLists.txt "${d}"
     cd "${d}"
 
     for g in ${gnu_version}

@@ -40,12 +40,14 @@ find_package(Boost 1.65.0
         wave
         wserialization
     REQUIRED)
-add_executable(a.out a.cpp)
+add_executable(a.out a.cpp main.cpp)
 target_link_libraries(a.out
     ${CMAKE_THREAD_LIBS_INIT}
     ${Boost_LIBRARIES}
 )
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
+
+set(MAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb3")
