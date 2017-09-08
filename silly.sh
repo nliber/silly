@@ -2,7 +2,7 @@
 set -xv
 
 gnu_version="${GNU_VERSION:-"7.1 7.2"}"
-clang_version="${CLANG_VERSION:-"802.0.42 4.0"}"
+clang_version="${CLANG_VERSION:-"900.0.35 5.0"}"
 
 for d in "${@}"
 do (
