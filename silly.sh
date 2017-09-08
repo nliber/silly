@@ -1,8 +1,8 @@
 #!/bin/sh
 set -xv
 
-gnu_version="${GNU_VERSION:-"7.1 7.2"}"
-clang_version="${CLANG_VERSION:-"900.0.35 5.0"}"
+gnu_version="${GNU_VERSION:-"7.2 7.1"}"
+clang_version="${CLANG_VERSION:-"5.0 xcode"}"
 
 for d in "${@}"
 do (
