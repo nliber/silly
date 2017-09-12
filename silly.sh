@@ -4,11 +4,14 @@ set -xv
 gnu_version="${GNU_VERSION:-"7.2 7.1"}"
 clang_version="${CLANG_VERSION:-"5.0 xcode"}"
 
+files="a.cpp main.cpp CMakeLists.txt"
+
 for d in "${@}"
 do (
     mkdir -p "${d}"
-    cp a.cpp main.cpp CMakeLists.txt "${d}"
+    cp -npv ${files} "${d}"
     cd "${d}"
+    chmod -v +w ${files}
 
     for g in ${gnu_version}
     do (
