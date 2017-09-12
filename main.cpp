@@ -4,6 +4,7 @@ extern int Main(int argc, char const*const argv[]);
 #include <boost/date_time/local_time/local_time.hpp>
 
 #include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <iterator>
 #include <string>
@@ -83,6 +84,23 @@ namespace {
     private:
         std::vector<std::string> args;
         std::vector<const char*> argvs;
+    };
+
+    class Stopwatch
+    {
+        using clock = std::chrono::high_resolution_clock;
+        using time_point = clock::time_point;
+
+        static time_point now() { return clock::now(); }
+
+    public:
+        using nanoseconds = std::chrono::nanoseconds;
+
+        nanoseconds lap() const noexcept
+        { return std::chrono::duration_cast<nanoseconds>(now() - start); }
+
+    private:
+        time_point start = now();
     };
 
 } // namespace
