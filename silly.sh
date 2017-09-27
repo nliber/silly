@@ -65,9 +65,9 @@ do (
             echo "compile_commands.json" >> ".gitignore"
             break
         fi
-    done < .gitignore
+    done < ".gitignore"
 
-    git add --verbose .gitignore
+    git add --verbose ".gitignore"
     git commit --verbose --allow-empty-message --no-edit
 
 ) done
