@@ -53,6 +53,19 @@ do (
 
     git init
     git add --verbose .
+
+    while read -r
+    do
+        compilation_database="${REPLY}compile_commands.json"
+        if [[ -r "${compilation_database}" ]]
+        then
+            ln -s "${compilation_database}" .
+            echo "compile_commands.json" >> ".gitignore"
+            break
+        fi
+    done < .gitignore
+
+    git add --verbose .gitignore
     git commit --verbose --allow-empty-message --no-edit
 
 ) done
