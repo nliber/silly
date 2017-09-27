@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -xv
 
 gnu_version="${GNU_VERSION:-"7.2 7.1"}"
