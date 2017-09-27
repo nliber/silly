@@ -39,8 +39,8 @@ do (
         echo "gcc${g}/" >> ".gitignore"
         cd "gcc${g}"
         CC="/usr/local/gcc-${g}/bin/gcc-${g}" CXX="/usr/local/gcc-${g}/bin/g++-${g}" cmake ${cmake_options} -G "${generator_name}" ..
-        ${make} -j 2
-    ) done
+        ${make} -j
+    )& done
 
     for c in ${clang_version}
     do (
@@ -48,8 +48,10 @@ do (
         echo "clang${c}/" >> ".gitignore"
         cd "clang${c}"
         CC="/usr/local/bin/clang-${c}" CXX="/usr/local/bin/clang++-${c}" cmake ${cmake_options} -G "${generator_name}" ..
-        ${make} -j 2
-    ) done
+        ${make} -j
+    )& done
+
+    wait
 
     git init
     git add --verbose .
