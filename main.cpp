@@ -1,13 +1,10 @@
 extern int Main(int argc, char const*const argv[]);
 
-#include <cool/Args.h>
-
 #include <boost/exception/diagnostic_information.hpp>
-#include <boost/date_time/local_time/local_time.hpp>
-
+#include <cool/Args.h>
+#include <cool/chrono.h>
 #include <chrono>
 #include <iostream>
-
 
 namespace {
 
@@ -32,13 +29,16 @@ namespace {
 
 int main(int argc, char* argv[])
 {
-    auto started = boost::posix_time::microsec_clock::local_time();
+    using cool::chrono::system_clock::operator<<;
+    using cool::chrono::duration::operator<<;
+
     std::cerr
         << "Built " <<  __FILE__ << " on " << __DATE__ << ' ' << __TIME__
         << "\nStarted " << cool::Args(argv)
-        << " at " << started
+        << " at " << std::chrono::system_clock{}
         << std::endl;
 
+    Stopwatch sw;
     int status;
 	try { status = Main(argc, argv); }
     catch (...)
@@ -49,11 +49,10 @@ int main(int argc, char* argv[])
         status = 1;
     }
 
-    auto stopped = boost::posix_time::microsec_clock::local_time();
     std::cerr
         << "Stopped " << cool::Args(argv)
-        << " at " << stopped
-        << " (duration: " << (stopped - started)
+        << " at " << std::chrono::system_clock{}
+        << " (" << sw.lap()
         << ") with status=" << status
         << std::endl;
 
