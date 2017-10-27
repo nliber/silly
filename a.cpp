@@ -15,13 +15,13 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <cstddef>
 #include <initializer_list>
 #include <tuple>
-#if __has_include(<any>)
+#if __cplusplus >= 201703L && __has_include(<any>)
 #include <any>
 #endif
-#if __has_include(<optional>)
+#if __cplusplus >= 201703L && __has_include(<optional>)
 #include <optional>
 #endif
-#if __has_include(<variant>)
+#if __cplusplus >= 201703L && __has_include(<variant>)
 #include <variant>
 #endif
 
@@ -52,7 +52,9 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <cuchar>
 #endif
 #include <string>
+#if __cplusplus >= 201703L
 #include <string_view>
+#endif
 
 #include <array>
 #include <vector>
