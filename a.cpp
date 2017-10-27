@@ -105,7 +105,9 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 
 #include <thread>
 #include <mutex>
+#if __cplusplus >= 201402L
 #include <shared_mutex>
+#endif
 #include <future>
 #include <condition_variable>
 
