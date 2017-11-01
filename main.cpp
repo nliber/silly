@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
         << " at " << std::chrono::system_clock{}
         << std::endl;
 
-    cool::Stopwatch<> sw;
+    cool::Stopwatch<> sw{true};
     int status;
 	try { status = Main(argc, argv); }
     catch (...)
