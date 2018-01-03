@@ -19,7 +19,7 @@ esac
 
 cmake_options="-D CMAKE_EXPORT_COMPILE_COMMANDS=ON"
 
-eclipse_product_version="$(fgrep -m 1 -s "version=" "${HOME}/eclipse/cpp-oxygen/Eclipse.app/Contents/Eclipse/.eclipseproduct")"
+eclipse_product_version="$(fgrep -m 1 -s -h "version=" "${HOME}/eclipse/cpp-oxygen/Eclipse.app/Contents/Eclipse/.eclipseproduct" "/opt/eclipse/.eclipseproduct")"
 eclipse_product_version="${eclipse_product_version#"version="}"
 if [[ -n "${eclipse_product_version}" ]]
 then
