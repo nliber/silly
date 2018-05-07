@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xv
 
-gnu_version="${GNU_VERSION:-"7.3"}"
+gnu_version="${GNU_VERSION:-"8.1"}"
 clang_version="${CLANG_VERSION:-"6.0"}"
 #gnu_version="${GNU_VERSION:-"7.2 7.1"}"
 #clang_version="${CLANG_VERSION:-"5.0 xcode"}"
