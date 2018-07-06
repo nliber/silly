@@ -68,6 +68,7 @@ endif(APPLE)
 
 if(UNIX AND NOT APPLE)
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -stdlib=libstdc++")
+set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} --gcc-toolchain=/usr/local/gcc")
 endif(UNIX AND NOT APPLE)
 
 set(CMAKE_CXX_CLANG_FLAGS "${CMAKE_CXX_CLANG_FLAGS} -Weverything")
