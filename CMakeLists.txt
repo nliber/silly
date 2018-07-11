@@ -40,8 +40,8 @@ find_package(Boost 1.67.0
         wave
         wserialization
     REQUIRED)
-add_executable(a.out a.cpp main.cpp)
-target_link_libraries(a.out
+add_executable(${PROJECT_NAME} a.cpp main.cpp)
+target_link_libraries(${PROJECT_NAME}
     ${CMAKE_THREAD_LIBS_INIT}
     ${Boost_LIBRARIES}
 )
