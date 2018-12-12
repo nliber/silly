@@ -1,10 +1,10 @@
-cmake_minimum_required (VERSION 3.12.2)
+cmake_minimum_required (VERSION 3.13.1)
 project (a.out)
 find_package(Threads REQUIRED)
 #SET(BOOST_ROOT "/usr/local/Cellar/boost/1.61.0")
 #SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BOOST_ROOT}/include)
 #SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${BOOST_ROOT}/lib)
-find_package(Boost 1.68.0
+find_package(Boost 1.69.0
     COMPONENTS
         atomic
         chrono
