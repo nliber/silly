@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.13.2)
+cmake_minimum_required (VERSION 3.13.4)
 project (a.out)
 find_package(Threads REQUIRED)
 #SET(BOOST_ROOT "/usr/local/Cellar/boost/1.61.0")
@@ -31,7 +31,7 @@ find_package(Boost 1.69.0
         random
         regex
         serialization
-        signals
+        #signals
         system
         test_exec_monitor
         thread
