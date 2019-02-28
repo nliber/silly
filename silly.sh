@@ -2,24 +2,24 @@
 set -xv
 
 gnu_version="${GNU_VERSION:-"8.3"}"
-clang_version="${CLANG_VERSION:-"7"}"
-#gnu_version="${GNU_VERSION:-"7.2 7.1"}"
-#clang_version="${CLANG_VERSION:-"5.0 xcode"}"
+clang_version="${CLANG_VERSION:-"7.0.0"}"
 
 make="${MAKE:-"make"}"
 shopt -s nocasematch
 case "${make}" in
     *ninja*)
         generator_name="${GENERATOR_NAME:-"Eclipse CDT4 - Ninja"}"
+        job="0"
         ;;
     *make*)
         generator_name="${GENERATOR_NAME:-"Eclipse CDT4 - Unix Makefiles"}"
+        job=""
         ;;
 esac
 
 cmake_options="-D CMAKE_EXPORT_COMPILE_COMMANDS=ON"
 
-eclipse_product_version="$(fgrep -m 1 -s -h "version=" "${HOME}/eclipse/cpp-photon/Eclipse.app/Contents/Eclipse/.eclipseproduct" "/opt/eclipse/.eclipseproduct")"
+eclipse_product_version="$(fgrep -m 1 -s -h "version=" "/Applications/Eclipse.app/Contents/Eclipse/.eclipseproduct")"
 eclipse_product_version="${eclipse_product_version#"version="}"
 if [[ -n "${eclipse_product_version}" ]]
 then
@@ -40,8 +40,9 @@ do (
         mkdir -p "gcc${g}"
         echo "gcc${g}/" >> ".gitignore"
         cd "gcc${g}"
-        CC="/usr/local/gcc-${g}/bin/gcc-${g}" CXX="/usr/local/gcc-${g}/bin/g++-${g}" cmake ${cmake_options} -G "${generator_name}" ..
-        ${make} -j
+        bin="/usr/local/gcc-${g}/bin"
+        CC="${bin}/gcc-${g}" CXX="${bin}/g++-${g}" cmake ${cmake_options} -G "${generator_name}" ..
+        ${make} -j ${job}
     )& done
 
     for c in ${clang_version}
@@ -49,8 +50,9 @@ do (
         mkdir -p "clang${c}"
         echo "clang${c}/" >> ".gitignore"
         cd "clang${c}"
-        CC="/usr/local/bin/clang-${c}" CXX="/usr/local/bin/clang++-${c}" cmake ${cmake_options} -G "${generator_name}" ..
-        ${make} -j
+        bin="/usr/local/clang+llvm-${c}-x86_64-apple-darwin/bin"
+        CC="${bin}/clang" CXX="${bin}/clang++" cmake ${cmake_options} -G "${generator_name}" ..
+        ${make} -j ${job}
     )& done
 
     wait
