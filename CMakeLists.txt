@@ -1,4 +1,7 @@
 cmake_minimum_required (VERSION 3.13.4)
+if(DEFINED CLANG_LINK_DIRECTORIES)
+    link_directories(BEFORE ${CLANG_LINK_DIRECTORIES})
+endif()
 project (a.out)
 find_package(Threads REQUIRED)
 #SET(BOOST_ROOT "/usr/local/Cellar/boost/1.61.0")

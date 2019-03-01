@@ -50,8 +50,8 @@ do (
         mkdir -p "clang${c}"
         echo "clang${c}/" >> ".gitignore"
         cd "clang${c}"
-        bin="/usr/local/clang+llvm-${c}-x86_64-apple-darwin/bin"
-        CC="${bin}/clang" CXX="${bin}/clang++" cmake ${cmake_options} -G "${generator_name}" ..
+        clang_root="/usr/local/clang+llvm-${c}-x86_64-apple-darwin"
+        CC="${clang_root}/bin/clang" CXX="${clang_root}/bin/clang++" cmake ${cmake_options} -D "CLANG_LINK_DIRECTORIES:PATH=${clang_root}/lib" -G "${generator_name}" ..
         ${make} -j ${job}
     )& done
 
