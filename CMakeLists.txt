@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.14.0)
+cmake_minimum_required (VERSION 3.14.2)
 if(DEFINED CLANG_LINK_DIRECTORIES)
     link_directories(BEFORE ${CLANG_LINK_DIRECTORIES})
 endif()
@@ -7,7 +7,7 @@ find_package(Threads REQUIRED)
 #SET(BOOST_ROOT "/usr/local/Cellar/boost/1.61.0")
 #SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BOOST_ROOT}/include)
 #SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${BOOST_ROOT}/lib)
-find_package(Boost 1.69.0
+find_package(Boost 1.70.0
     COMPONENTS
         atomic
         chrono
