@@ -69,8 +69,10 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <queue>
 
 #include <algorithm>
+#if 0
 #if __has_include(<execution>)
 #include <execution>
+#endif
 #endif
 
 #include <iterator>

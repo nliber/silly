@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xv
 
-gnu_version="${GNU_VERSION:-"8.3"}"
+gnu_version="${GNU_VERSION:-"9.1.0"}"
 clang_version="${CLANG_VERSION:-"8.0.0"}"
 
 make="${MAKE:-"make"}"

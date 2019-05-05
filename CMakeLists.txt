@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.14.2)
+cmake_minimum_required (VERSION 3.14.3)
 if(DEFINED CLANG_LINK_DIRECTORIES)
     link_directories(BEFORE ${CLANG_LINK_DIRECTORIES})
 endif()
