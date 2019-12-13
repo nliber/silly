@@ -1,8 +1,8 @@
 #!/bin/bash
 set -xv
 
-gnu_version="${GNU_VERSION:-"9.1.0"}"
-clang_version="${CLANG_VERSION:-"8.0.0"}"
+gnu_version="${GNU_VERSION:-"9"}"
+clang_version="${CLANG_VERSION:-"9.0.0"}"
 
 make="${MAKE:-"make"}"
 shopt -s nocasematch
@@ -40,7 +40,7 @@ do (
         mkdir -p "gcc${g}"
         echo "gcc${g}/" >> ".gitignore"
         cd "gcc${g}"
-        bin="/usr/local/gcc-${g}/bin"
+        bin="/usr/local/opt/gcc/bin"
         CC="${bin}/gcc-${g}" CXX="${bin}/g++-${g}" cmake ${cmake_options} -G "${generator_name}" ..
         ${make} -j ${job}
     )& done
@@ -50,7 +50,8 @@ do (
         mkdir -p "clang${c}"
         echo "clang${c}/" >> ".gitignore"
         cd "clang${c}"
-        clang_root="/usr/local/clang+llvm-${c}-x86_64-apple-darwin"
+        #clang_root="/usr/local/clang+llvm-${c}-x86_64-apple-darwin"
+        clang_root="/usr/local/llvm"
         CC="${clang_root}/bin/clang" CXX="${clang_root}/bin/clang++" cmake ${cmake_options} -D "CLANG_LINK_DIRECTORIES:PATH=${clang_root}/lib" -G "${generator_name}" ..
         ${make} -j ${job}
     )& done

@@ -1,5 +1,6 @@
 extern int Main(int argc, char const*const argv[]);
 
+#include <string>   // Bug workaround for gcc 9.2 - include before diagnostic_information.hpp
 #include <boost/exception/diagnostic_information.hpp>
 #include <cool/Args.h>
 #include <cool/chrono.h>

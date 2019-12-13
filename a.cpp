@@ -1,5 +1,7 @@
 extern int Main(int /* argc */, char const*const /* argv */[]);
 
+#include <cstdio>   // Bug workaround -- put this before <cstdlib>
+
 #include <cstdlib>
 #include <csignal>
 #include <csetjmp>
@@ -95,7 +97,7 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 // #include <strstream>    // deprecated
 #include <iomanip>
 #include <streambuf>
-#include <cstdio>
+// #include <cstdio>    // Bug workaround -- put this before <cstdlib>
 
 #include <locale>
 #include <clocale>
