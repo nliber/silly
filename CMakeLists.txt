@@ -7,6 +7,7 @@ find_package(Threads REQUIRED)
 #SET(BOOST_ROOT "/usr/local/Cellar/boost/1.61.0")
 #SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BOOST_ROOT}/include)
 #SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${BOOST_ROOT}/lib)
+include_directories(SYSTEM /usr/local/include)
 find_package(Boost 1.70.0
     COMPONENTS
         atomic
