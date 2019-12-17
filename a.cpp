@@ -63,7 +63,6 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 
 #include <locale>
 #include <clocale>
-#include <codecvt>      // deprecated C++17
 
 #if __cplusplus >= 201103L
 #include <typeindex>
@@ -74,7 +73,9 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <cstdint>
 #include <cinttypes>
 #include <system_error>
-//#include <cuchar>
+#if __cplusplus >= 201703L && __has_include(<cuchar>)
+#include <cuchar>   // C++11 header but don't have __has_include until C++17
+#endif
 #include <array>
 #include <forward_list>
 #include <unordered_set>
@@ -82,6 +83,9 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <random>
 #include <ratio>
 #include <cfenv>
+#if __cplusplus < 201703L
+#include <codecvt>
+#endif
 #include <regex>
 #include <atomic>
 #include <thread>
@@ -103,7 +107,9 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #endif
 #include <string_view>
 #include <charconv>
-//#include <execution>
+#if __has_include(<execution>)
+//#include <execution>  // Doesn't compile under gcc w/o TBB
+#endif
 #include <filesystem>
 #endif  // C++17
 
