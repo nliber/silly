@@ -12,22 +12,10 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <utility>
 #include <ctime>
 #include <cstddef>
-#if __cplusplus >= 201703L && __has_include(<any>)
-#include <any>
-#endif
-#if __cplusplus >= 201703L && __has_include(<optional>)
-#include <optional>
-#endif
-#if __cplusplus >= 201703L && __has_include(<variant>)
-#include <variant>
-#endif
 
 #include <new>
 #include <memory>
 #include <scoped_allocator>
-#if __has_include(<memory_resource>)
-# include <memory_resource>
-#endif
 
 #include <climits>
 #include <cfloat>
@@ -46,9 +34,6 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <cuchar>
 #endif
 #include <string>
-#if __cplusplus >= 201703L
-#include <string_view>
-#endif
 
 #include <vector>
 #include <deque>
@@ -88,12 +73,6 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <clocale>
 #include <codecvt>      // deprecated C++17
 
-
-
-#if __has_include(<filesystem>)
-#include <filesystem>
-#endif
-
 #if __cplusplus >= 201103L
 #include <typeindex>
 #include <type_traits>
@@ -124,6 +103,16 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #endif  // C++14
 
 #if __cplusplus >= 201703L
+#include <any>
+#include <optional>
+#include <variant>
+#if __has_include(<memory_resource>)
+#include <memory_resource>
+#endif
+#include <string_view>
+#include <charconv>
+//#include <execution>
+#include <filesystem>
 #endif  // C++17
 
 #if __cplusplus > 201703L
