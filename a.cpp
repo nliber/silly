@@ -90,10 +90,6 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 
 
 
-#if __cplusplus >= 201402L
-#include <shared_mutex>
-#endif
-
 #if __has_include(<filesystem>)
 #include <filesystem>
 #endif
@@ -124,6 +120,7 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #endif  // C++11
 
 #if __cplusplus >= 201402L
+#include <shared_mutex>
 #endif  // C++14
 
 #if __cplusplus >= 201703L
