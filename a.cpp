@@ -30,9 +30,6 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <cwctype>
 #include <cstring>
 #include <cwchar>
-#if __has_include(<cuchar>)
-#include <cuchar>
-#endif
 #include <string>
 
 #include <vector>
@@ -44,11 +41,6 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <queue>
 
 #include <algorithm>
-#if 0
-#if __has_include(<execution>)
-#include <execution>
-#endif
-#endif
 
 #include <iterator>
 
@@ -116,8 +108,48 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #endif  // C++17
 
 #if __cplusplus > 201703L
+#if __has_include(<concepts>)
+#include <concepts>
+#endif
+#if __has_include(<coroutine>)
+#include <coroutine>
+#endif
+#if __has_include(<compare>)
+#include <compare>
+#endif
+#include <version>
+#if __has_include(<source_location>)
+#include <source_location>
+#endif
+#if __has_include(<format>)
+#include <format>
+#endif
+#if __has_include(<span>)
+#include <span>
+#endif
+#if __has_include(<ranges>)
+#include <ranges>
+#endif
+#include <bit>
+#if __has_include(<numbers>)
+#include <numbers>
+#endif
+#if __has_include(<syncstream>)
+#include <syncstream>
+#endif
+#if __has_include(<stop_token>)
+#include <stop_token>
+#endif
+#if __has_include(<semaphore>)
+#include <semaphore>
+#endif
+#if __has_include(<latch>)
+#include <latch>
+#endif
+#if __has_include(<barrier>)
+#include <barrier>
+#endif
 #endif  // C++20
-
 
 
 
