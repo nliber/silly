@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xv
 
-gnu_version="${GNU_VERSION:-"9"}"
+gnu_version="${GNU_VERSION:-"10.1"}"
 clang_version="${CLANG_VERSION:-"10"}"
 
 make="${MAKE:-"make"}"
@@ -40,7 +40,7 @@ do (
         mkdir -p "gcc${g}"
         echo "gcc${g}/" >> ".gitignore"
         cd "gcc${g}"
-        bin="/usr/local/opt/gcc/bin"
+        bin="/usr/local/gcc/bin"
         CC="${bin}/gcc-${g}" CXX="${bin}/g++-${g}" cmake ${cmake_options} -G "${generator_name}" ..
         ${make} -j ${job}
     )& done

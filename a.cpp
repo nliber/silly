@@ -117,7 +117,7 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #if __has_include(<concepts>)
 #include <concepts>
 #endif
-#if __has_include(<coroutine>)
+#if __has_include(<coroutine>) && __cpp_impl_coroutine
 #include <coroutine>
 #endif
 #if __has_include(<compare>)
