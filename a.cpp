@@ -114,45 +114,45 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #endif  // C++17
 
 #if __cplusplus > 201703L
-#if __has_include(<concepts>)
+#if __has_include(<concepts>) && __cpp_lib_concepts >= 202002L
 #include <concepts>
 #endif
-#if __has_include(<coroutine>) && __cpp_impl_coroutine
+#if __has_include(<coroutine>) && __cpp_lib_coroutine >= 201902L
 #include <coroutine>
 #endif
-#if __has_include(<compare>)
+#if __has_include(<compare>) // && __cpp_lib_three_way_comparison >= 201907L
 #include <compare>
 #endif
 #include <version>
-#if __has_include(<source_location>)
+#if __has_include(<source_location>) && __cpp_lib_source_location >= 201907L
 #include <source_location>
 #endif
-#if __has_include(<format>)
+#if __has_include(<format>) && __cpp_lib_format >= 201907L
 #include <format>
 #endif
-#if __has_include(<span>)
+#if __has_include(<span>) // && __cpp_lib_span >= 202002L
 #include <span>
 #endif
-#if __has_include(<ranges>)
+#if __has_include(<ranges>) && __cpp_lib_ranges >= 201911L
 #include <ranges>
 #endif
 #include <bit>
-#if __has_include(<numbers>)
+#if __has_include(<numbers>) && __cpp_lib_math_constants >= 201907L
 #include <numbers>
 #endif
-#if __has_include(<syncstream>)
+#if __has_include(<syncstream>) && __cpp_lib_syncbuf >= 201803L
 #include <syncstream>
 #endif
-#if __has_include(<stop_token>)
+#if __has_include(<stop_token>) && __cpp_lib_jthread >= 201911L
 #include <stop_token>
 #endif
-#if __has_include(<semaphore>)
+#if __has_include(<semaphore>) && __cpp_lib_semaphore >= 201907L
 #include <semaphore>
 #endif
-#if __has_include(<latch>)
+#if __has_include(<latch>) && __cpp_lib_latch >= 201907L
 #include <latch>
 #endif
-#if __has_include(<barrier>)
+#if __has_include(<barrier>) && __cpp_lib_barrier >= 201907L
 #include <barrier>
 #endif
 #endif  // C++20
