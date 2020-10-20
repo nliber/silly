@@ -2,7 +2,7 @@
 set -xv
 
 gnu_version="${GNU_VERSION:-"10"}"
-clang_version="${CLANG_VERSION:-"10"}"
+clang_version="${CLANG_VERSION:-"11"}"
 
 make="${MAKE:-"make"}"
 shopt -s nocasematch
