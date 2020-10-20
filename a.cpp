@@ -114,7 +114,7 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #endif  // C++17
 
 #if __cplusplus > 201703L
-#if __has_include(<concepts>) && __cpp_lib_concepts >= 202002L
+#if __has_include(<concepts>) && defined(__cpp_lib_concepts) && __cpp_lib_concepts >= 202002L
 #include <concepts>
 #endif
 #if __has_include(<coroutine>) && __cpp_lib_coroutine >= 201902L
@@ -146,13 +146,13 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #if __has_include(<stop_token>) && __cpp_lib_jthread >= 201911L
 #include <stop_token>
 #endif
-#if __has_include(<semaphore>) && __cpp_lib_semaphore >= 201907L
+#if __has_include(<semaphore>) && defined(__cpp_lib_semaphore) && __cpp_lib_semaphore >= 201907L
 #include <semaphore>
 #endif
-#if __has_include(<latch>) && __cpp_lib_latch >= 201907L
+#if __has_include(<latch>) && defined(__cpp_lib_latch) && __cpp_lib_latch >= 201907L
 #include <latch>
 #endif
-#if __has_include(<barrier>) && __cpp_lib_barrier >= 201907L
+#if __has_include(<barrier>) && defined(__cpp_lib_barrier) && __cpp_lib_barrier >= 201907L
 #include <barrier>
 #endif
 #endif  // C++20
