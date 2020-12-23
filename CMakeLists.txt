@@ -1,14 +1,15 @@
-cmake_minimum_required (VERSION 3.14.3)
+cmake_minimum_required (VERSION 3.19.2)
 if(DEFINED CLANG_LINK_DIRECTORIES)
     link_directories(BEFORE ${CLANG_LINK_DIRECTORIES})
 endif()
+
 project (a.out)
 find_package(Threads REQUIRED)
 #SET(BOOST_ROOT "/usr/local/Cellar/boost/1.61.0")
 #SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BOOST_ROOT}/include)
 #SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${BOOST_ROOT}/lib)
 include_directories(SYSTEM /usr/local/include)
-find_package(Boost 1.70.0
+find_package(Boost 1.75.0
     COMPONENTS
         atomic
         chrono
@@ -44,6 +45,7 @@ find_package(Boost 1.70.0
         wave
         wserialization
     REQUIRED)
+link_directories(AFTER "/usr/local/opt/icu4c/lib/") # for Boost.Regex on 1.75
 add_executable(${PROJECT_NAME} a.cpp main.cpp)
 target_link_libraries(${PROJECT_NAME}
     ${CMAKE_THREAD_LIBS_INIT}
