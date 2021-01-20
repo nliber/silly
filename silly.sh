@@ -58,7 +58,7 @@ do (
 
     wait
 
-    git init
+    git init --initial-branch "${d}"
     git add --verbose .
 
     while read -r
