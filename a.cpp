@@ -83,7 +83,7 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <random>
 #include <ratio>
 #include <cfenv>
-#if __cplusplus < 201703L
+#if __cplusplus < 201703L && __has_include(<codecvt>)
 #include <codecvt>
 #endif
 #include <regex>
@@ -106,11 +106,15 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #include <memory_resource>
 #endif
 #include <string_view>
+#if __has_include(<charconv>)
 #include <charconv>
+#endif
 #if __has_include(<execution>)
 //#include <execution>  // Doesn't compile under gcc w/o TBB
 #endif
+#if __has_include(<filesystem>)
 #include <filesystem>
+#endif
 #endif  // C++17
 
 #if __cplusplus > 201703L
