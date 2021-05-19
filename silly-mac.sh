@@ -79,6 +79,30 @@ do (
 
     wait
 
+    # Create symlink for latest gcc
+    for gccroot in /usr/local/Cellar/gcc/*
+    do (
+        cxx="$(echo "${gccroot}"/bin/g++-*)"
+        version="${cxx#"${gccroot}"/bin/g++-}"
+        build=gcc"${version}"
+
+        ln -s "${build}" gcc
+        echo gcc >> ".gitignore"
+    ) done
+
+    # Create symlink for latest clang
+    for clangroot in /usr/local/Cellar/llvm/*
+    do (
+        version="${clangroot#/usr/local/Cellar/llvm*/}"
+        version="${version%%.*}"
+        build=clang"${version}"
+
+        ln -s "${build}" clang
+        echo clang >> ".gitignore"
+
+    ) done
+
+
     git init --initial-branch "${d}"
     git add --verbose .
 
