@@ -30,6 +30,12 @@ files="a.cpp main.cpp CMakeLists.txt"
 
 for d in "${@}"
 do (
+    if [[ -e "${d}" ]]
+    then
+        printf "%q exists; ABORTING!" "${d}" >&2
+        exit 1
+    fi
+
     mkdir -p "${d}"
     cp -npv ${files} "${d}"
     cd "${d}"
