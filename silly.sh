@@ -1,8 +1,8 @@
 #!/bin/bash
 set -xv
 
-gnu_version="${GNU_VERSION:-"10"}"
-clang_version="${CLANG_VERSION:-"11"}"
+gnu_version="${GNU_VERSION:-"11"}"
+clang_version="${CLANG_VERSION:-"12"}"
 
 make="${MAKE:-"make"}"
 shopt -s nocasematch
