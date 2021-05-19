@@ -123,7 +123,9 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #if __has_include(<compare>) // && __cpp_lib_three_way_comparison >= 201907L
 #include <compare>
 #endif
+#if __has_include(<version>)
 #include <version>
+#endif
 #if __has_include(<source_location>) && __cpp_lib_source_location >= 201907L
 #include <source_location>
 #endif
@@ -136,7 +138,9 @@ extern int Main(int /* argc */, char const*const /* argv */[]);
 #if __has_include(<ranges>) && __cpp_lib_ranges >= 201911L
 #include <ranges>
 #endif
+#if __has_include(<bit>)
 #include <bit>
+#endif
 #if __has_include(<numbers>) && __cpp_lib_math_constants >= 201907L
 #include <numbers>
 #endif
