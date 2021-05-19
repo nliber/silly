@@ -1,8 +1,8 @@
 #!/bin/bash
-#set -xv
+set -xv
 
-gnu_version="${GNU_VERSION:-"11"}"
-clang_version="${CLANG_VERSION:-"11"}"
+#gnu_version="${GNU_VERSION:-"11"}"
+#clang_version="${CLANG_VERSION:-"11"}"
 
 make="${MAKE:-"make"}"
 shopt -s nocasematch
@@ -35,7 +35,7 @@ do (
     cd "${d}"
     chmod -v +w ${files}
 
-    for gccroot in /usr/local/Cellar/gcc*/*
+    for gccroot in /usr/local/opt/gcc@*
     do (
         cxx="$(echo "${gccroot}"/bin/g++-*)"
         version="${cxx#"${gccroot}"/bin/g++-}"
@@ -43,22 +43,38 @@ do (
         build=gcc"${version}"
 
         mkdir -p "${build}"
-        echo "${build}"/ >> ".gitignore"
+        echo "${build}"/ >> .gitignore
+
+        if [[ /usr/local/opt/gcc -ef "${gccroot}" ]]
+        then
+            ln -s "${build}"/ gcc
+            echo gcc/ >> .gitignore
+        fi
+
         cd "${build}"
         CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -G "${generator_name}" ~-
         ${make} -j ${job}
+
     )& done
 
-    for clangroot in /usr/local/Cellar/llvm*/*
+    for clangroot in /usr/local/opt/llvm@*
     do (
         cxx="${clangroot}"/bin/clang++
-        version="${clangroot#/usr/local/Cellar/llvm*/}"
+        version="$(readlink "${clangroot}")"
+        version="${version##*/}"
         version="${version%%.*}"
         cc="${clangroot}"/bin/clang
         build=clang"${version}"
 
         mkdir -p "${build}"
-        echo "${build}"/ >> ".gitignore"
+        echo "${build}"/ >> .gitignore
+
+        if [[ /usr/local/opt/llvm -ef "${clangroot}" ]]
+        then
+            ln -s "${build}"/ clang
+            echo clang/ >> .gitignore
+        fi
+
         cd "${build}"
         CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -D "CLANG_LINK_DIRECTORIES:PATH=${clang_root}/lib" -G "${generator_name}" ~-
         ${make} -j ${job}
@@ -71,7 +87,8 @@ do (
         build=clangapple
 
         mkdir -p "${build}"
-        echo "${build}"/ >> ".gitignore"
+        echo "${build}"/ >> .gitignore
+
         cd "${build}"
         CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -G "${generator_name}" ~-
         ${make} -j ${job}
@@ -79,45 +96,20 @@ do (
 
     wait
 
-    # Create symlink for latest gcc
-    for gccroot in /usr/local/Cellar/gcc/*
-    do (
-        cxx="$(echo "${gccroot}"/bin/g++-*)"
-        version="${cxx#"${gccroot}"/bin/g++-}"
-        build=gcc"${version}"
-
-        ln -s "${build}" gcc
-        echo gcc >> ".gitignore"
-    ) done
-
-    # Create symlink for latest clang
-    for clangroot in /usr/local/Cellar/llvm/*
-    do (
-        version="${clangroot#/usr/local/Cellar/llvm*/}"
-        version="${version%%.*}"
-        build=clang"${version}"
-
-        ln -s "${build}" clang
-        echo clang >> ".gitignore"
-
-    ) done
-
+    # Create symlink for compilecommands
+    compilecommands="compile_commands.json"
+    for build in clang gcc clangapple clang* gcc*
+    do
+        if [[ -r "${build}"/"${compilecommands}" ]]
+        then
+            ln -s "${build}"/"${compilecommands}" "${compilecommands}"
+            echo "${compilecommands}" >> .gitignore
+            break
+        fi
+    done
 
     git init --initial-branch "${d}"
     git add --verbose .
-
-    while read -r
-    do
-        compilation_database="${REPLY}compile_commands.json"
-        if [[ -r "${compilation_database}" ]]
-        then
-            ln -s "${compilation_database}" .
-            echo "compile_commands.json" >> ".gitignore"
-            break
-        fi
-    done < ".gitignore"
-
-    git add --verbose ".gitignore"
     git commit --verbose --allow-empty-message --no-edit
 
 ) done
