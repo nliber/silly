@@ -48,14 +48,18 @@ do (
         ${make} -j ${job}
     )& done
 
-    for c in ${clang_version}
+    for clangroot in /usr/local/Cellar/llvm*/*
     do (
-        mkdir -p "clang${c}"
-        echo "clang${c}/" >> ".gitignore"
-        cd "clang${c}"
-        #clang_root="/usr/local/clang+llvm-${c}-x86_64-apple-darwin"
-        clang_root="/usr/local/clang"
-        CC="${clang_root}/bin/clang" CXX="${clang_root}/bin/clang++" cmake ${cmake_options} -D "CLANG_LINK_DIRECTORIES:PATH=${clang_root}/lib" -G "${generator_name}" ..
+        cxx="${clangroot}"/bin/clang++
+        version="${clangroot#/usr/local/Cellar/llvm*/}"
+        version="${version%%.*}"
+        cc="${clangroot}"/bin/clang
+        build=clang"${version}"
+        declare -p cxx version cc build
+        mkdir -p "${build}"
+        echo "${build}/" >> ".gitignore"
+        cd "${build}"
+        CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -D "CLANG_LINK_DIRECTORIES:PATH=${clang_root}/lib" -G "${generator_name}" ~-
         ${make} -j ${job}
     )& done
 
