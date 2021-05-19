@@ -41,8 +41,9 @@ do (
         version="${cxx#"${gccroot}"/bin/g++-}"
         cc="${gccroot}"/bin/gcc-"${version}"
         build=gcc"${version}"
+
         mkdir -p "${build}"
-        echo "${build}" >> ".gitignore"
+        echo "${build}"/ >> ".gitignore"
         cd "${build}"
         CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -G "${generator_name}" ~-
         ${make} -j ${job}
@@ -55,13 +56,26 @@ do (
         version="${version%%.*}"
         cc="${clangroot}"/bin/clang
         build=clang"${version}"
-        declare -p cxx version cc build
+
         mkdir -p "${build}"
-        echo "${build}/" >> ".gitignore"
+        echo "${build}"/ >> ".gitignore"
         cd "${build}"
         CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -D "CLANG_LINK_DIRECTORIES:PATH=${clang_root}/lib" -G "${generator_name}" ~-
         ${make} -j ${job}
     )& done
+
+    (
+        cxx=/usr/bin/clang++
+        version=apple
+        cc=/usr/bin/clang
+        build=clangapple
+
+        mkdir -p "${build}"
+        echo "${build}"/ >> ".gitignore"
+        cd "${build}"
+        CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -G "${generator_name}" ~-
+        ${make} -j ${job}
+    )&
 
     wait
 
