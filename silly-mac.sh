@@ -54,7 +54,7 @@ do (
         if [[ /usr/local/opt/gcc -ef "${gccroot}" ]]
         then
             ln -s "${build}"/ gcc
-            echo gcc/ >> .gitignore
+            echo gcc >> .gitignore
         fi
 
         cd "${build}"
@@ -78,7 +78,7 @@ do (
         if [[ /usr/local/opt/llvm -ef "${clangroot}" ]]
         then
             ln -s "${build}"/ clang
-            echo clang/ >> .gitignore
+            echo clang >> .gitignore
         fi
 
         cd "${build}"
