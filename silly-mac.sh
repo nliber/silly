@@ -41,17 +41,18 @@ do (
     cd "${d}"
     chmod -v +w ${files}
 
-    for gccroot in /usr/local/opt/gcc@*
+    for gccroot in "${HOMEBREW_CELLAR}"/gcc/* "${HOMEBREW_CELLAR}"/gcc@*/*
     do (
-        cxx="$(echo "${gccroot}"/bin/g++-*)"
-        version="${cxx#"${gccroot}"/bin/g++-}"
-        cc="${gccroot}"/bin/gcc-"${version}"
-        build=gcc"${version}"
+        version="${gccroot##*/}"
+        major="${version%%.*}"
+        cxx="${gccroot}"/bin/g++-"${major}"
+        cc="${gccroot}"/bin/gcc-"${major}"
+        build=gcc-"${version}"
 
         mkdir -p "${build}"
         echo "${build}"/ >> .gitignore
 
-        if [[ /usr/local/opt/gcc -ef "${gccroot}" ]]
+        if [[ "${gccroot%/*}" == "${HOMEBREW_CELLAR}"/gcc ]]
         then
             ln -s "${build}"/ gcc
             echo gcc >> .gitignore
@@ -63,7 +64,7 @@ do (
 
     )& done
 
-    for clangroot in /usr/local/opt/llvm@*
+    for clangroot in # /usr/local/opt/llvm@*
     do (
         cxx="${clangroot}"/bin/clang++
         version="$(readlink "${clangroot}")"
