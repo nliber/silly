@@ -44,7 +44,7 @@ do (
     for gccroot in "${HOMEBREW_PREFIX}"/opt/gcc "${HOMEBREW_PREFIX}"/opt/gcc@*
     do (
         version="$(readlink "${gccroot}")"
-        version="${version##*/}"_
+        version="${version##*/}"
         version="${version%_*}"
         major="${version%%.*}"
         cxx="${gccroot}"/bin/g++-"${major}"
@@ -79,12 +79,6 @@ do (
         mkdir -p "${build}"
         echo "${build}"/ >> .gitignore
 
-        if [[ /usr/local/opt/llvm -ef "${clangroot}" ]]
-        then
-            ln -s "${build}"/ clang
-            echo clang >> .gitignore
-        fi
-
         cd "${build}"
         CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -D "CLANG_LINK_DIRECTORIES:PATH=${clang_root}/lib" -G "${generator_name}" ~-
         ${make} -j ${job}
@@ -92,16 +86,21 @@ do (
 
     (
         cxx=/usr/bin/clang++
-        version=apple
-        cc=/usr/bin/clang
-        build=clangapple
+        version="$("${cxx}" --version)"
+        version="${version#*(}"
+        version="${version%%)*}"
+        build="${version}"
 
         mkdir -p "${build}"
         echo "${build}"/ >> .gitignore
 
+        ln -s "${build}"/ clang
+        echo clang >> .gitignore
+
         cd "${build}"
         CC="${cc}" CXX="${cxx}" cmake ${cmake_options} -G "${generator_name}" ~-
         ${make} -j ${job}
+
     )&
 
     wait
