@@ -44,8 +44,8 @@ do (
     for gccroot in "${HOMEBREW_PREFIX}"/opt/gcc "${HOMEBREW_PREFIX}"/opt/gcc@*
     do (
         version="$(readlink "${gccroot}")"
-        version="${version##*/}"
-        # version="${Version%_*}"
+        version="${version##*/}"_
+        version="${version%_*}"
         major="${version%%.*}"
         cxx="${gccroot}"/bin/g++-"${major}"
         cc="${gccroot}"/bin/gcc-"${major}"
@@ -70,6 +70,7 @@ do (
     do (
         version="$(readlink "${clangroot}")"
         version="${version##*/}"
+        version="${version%%_*}"
         major="${version%%.*}"
         cxx="${clangroot}"/bin/clang++
         cc="${clangroot}"/bin/clang
