@@ -8,23 +8,16 @@ make="${MAKE:-"make"}"
 shopt -s nocasematch
 case "${make}" in
     *ninja*)
-        generator_name="${GENERATOR_NAME:-"Eclipse CDT4 - Ninja"}"
+        generator_name="${GENERATOR_NAME:-"Ninja Multi-Config"}"
         job="0"
         ;;
     *make*)
-        generator_name="${GENERATOR_NAME:-"Eclipse CDT4 - Unix Makefiles"}"
+        generator_name="${GENERATOR_NAME:-"Unix Makefiles"}"
         job=""
         ;;
 esac
 
 cmake_options="-D CMAKE_EXPORT_COMPILE_COMMANDS=ON"
-
-eclipse_product_version="$(fgrep -m 1 -s -h "version=" "/Applications/Eclipse.app/Contents/Eclipse/.eclipseproduct")"
-eclipse_product_version="${eclipse_product_version#"version="}"
-if [[ -n "${eclipse_product_version}" ]]
-then
-    cmake_options="${cmake_options} -D CMAKE_ECLIPSE_VERSION=${eclipse_product_version}"
-fi
 
 files="a.cpp main.cpp CMakeLists.txt"
 
