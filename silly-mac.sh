@@ -42,7 +42,7 @@ do (
         major="${version%%.*}"
         cxx="${gccroot}"/bin/g++-"${major}"
         cc="${gccroot}"/bin/gcc-"${major}"
-        build=gcc-"${version}"
+        build=gcc"${major}"
 
         mkdir -p "${build}"
         echo "${build}"/ >> .gitignore
@@ -67,7 +67,7 @@ do (
         major="${version%%.*}"
         cxx="${clangroot}"/bin/clang++
         cc="${clangroot}"/bin/clang
-        build=clang-"${version}"
+        build=clang"${major}"
 
         mkdir -p "${build}"
         echo "${build}"/ >> .gitignore
