@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.26.4)
+cmake_minimum_required (VERSION 4.2.0)
 if(DEFINED CLANG_LINK_DIRECTORIES)
     link_directories(BEFORE ${CLANG_LINK_DIRECTORIES})
 endif()
@@ -6,7 +6,7 @@ endif()
 project (a.out)
 find_package(Threads REQUIRED)
 include_directories(SYSTEM /usr/local/include)
-find_package(Boost 1.75.0
+find_package(Boost 1.89.0
     COMPONENTS
         atomic
         chrono
@@ -34,7 +34,7 @@ find_package(Boost 1.75.0
         regex
         serialization
         #signals
-        system
+        #system
         test_exec_monitor
         thread
         timer
